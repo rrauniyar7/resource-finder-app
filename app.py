@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from googlesearch import search
+import os
 
 app = Flask(__name__)
 
@@ -72,4 +73,6 @@ def index():
     return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", PORT=5000, debug=True)
+    PORT = int(os.getenv("PORT", 5000))
+    print(f"Running on port {PORT}")  # Print the port to the logs
+    app.run(host="0.0.0.0", port=PORT, debug=True)
